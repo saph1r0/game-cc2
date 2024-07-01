@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
-add_executable(juego ${SOURCE_DIR}/main.cpp ${SOURCE_DIR}/Platform.cpp ${SOURCE_DIR}/Player.cpp ${SOURCE_DIR}/Fireball.cpp)
+add_executable(juego ${SOURCE_DIR}/main.cpp ${SOURCE_DIR}/Platform.cpp ${SOURCE_DIR}/Player.cpp ${SOURCE_DIR}/Fireball.cpp ${SOURCE_DIR}/Item.cpp)
 
 target_link_libraries(juego sfml-system sfml-window sfml-graphics)
 

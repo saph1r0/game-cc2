@@ -153,6 +153,30 @@ src/Fireball.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/Fireball.cpp.s
 .PHONY : src/Fireball.cpp.s
 
+src/Item.o: src/Item.cpp.o
+.PHONY : src/Item.o
+
+# target to build an object file
+src/Item.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/Item.cpp.o
+.PHONY : src/Item.cpp.o
+
+src/Item.i: src/Item.cpp.i
+.PHONY : src/Item.i
+
+# target to preprocess a source file
+src/Item.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/Item.cpp.i
+.PHONY : src/Item.cpp.i
+
+src/Item.s: src/Item.cpp.s
+.PHONY : src/Item.s
+
+# target to generate assembly for a file
+src/Item.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/Item.cpp.s
+.PHONY : src/Item.cpp.s
+
 src/Platform.o: src/Platform.cpp.o
 .PHONY : src/Platform.o
 
@@ -237,6 +261,9 @@ help:
 	@echo "... src/Fireball.o"
 	@echo "... src/Fireball.i"
 	@echo "... src/Fireball.s"
+	@echo "... src/Item.o"
+	@echo "... src/Item.i"
+	@echo "... src/Item.s"
 	@echo "... src/Platform.o"
 	@echo "... src/Platform.i"
 	@echo "... src/Platform.s"

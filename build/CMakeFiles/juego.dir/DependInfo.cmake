@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/ubuntu20/c++/gaamee-cc2/src/Fireball.cpp" "CMakeFiles/juego.dir/src/Fireball.cpp.o" "gcc" "CMakeFiles/juego.dir/src/Fireball.cpp.o.d"
+  "/home/ubuntu20/c++/gaamee-cc2/src/Item.cpp" "CMakeFiles/juego.dir/src/Item.cpp.o" "gcc" "CMakeFiles/juego.dir/src/Item.cpp.o.d"
   "/home/ubuntu20/c++/gaamee-cc2/src/Platform.cpp" "CMakeFiles/juego.dir/src/Platform.cpp.o" "gcc" "CMakeFiles/juego.dir/src/Platform.cpp.o.d"
   "/home/ubuntu20/c++/gaamee-cc2/src/Player.cpp" "CMakeFiles/juego.dir/src/Player.cpp.o" "gcc" "CMakeFiles/juego.dir/src/Player.cpp.o.d"
   "/home/ubuntu20/c++/gaamee-cc2/src/main.cpp" "CMakeFiles/juego.dir/src/main.cpp.o" "gcc" "CMakeFiles/juego.dir/src/main.cpp.o.d"

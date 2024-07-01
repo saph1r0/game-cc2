@@ -1,11 +1,11 @@
-CMakeFiles/juego.dir/src/main.cpp.o: \
- /home/ubuntu20/c++/gaamee-cc2/src/main.cpp /usr/include/stdc-predef.h \
- /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
- /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
- /usr/include/SFML/System/Clock.hpp /usr/include/SFML/System/Export.hpp \
- /usr/include/SFML/System/Time.hpp /usr/include/SFML/System/Err.hpp \
- /usr/include/c++/11/ostream /usr/include/c++/11/ios \
- /usr/include/c++/11/iosfwd \
+CMakeFiles/juego.dir/src/Item.cpp.o: \
+ /home/ubuntu20/c++/gaamee-cc2/src/Item.cpp /usr/include/stdc-predef.h \
+ /home/ubuntu20/c++/gaamee-cc2/src/Item.h /usr/include/SFML/Graphics.hpp \
+ /usr/include/SFML/Window.hpp /usr/include/SFML/System.hpp \
+ /usr/include/SFML/Config.hpp /usr/include/SFML/System/Clock.hpp \
+ /usr/include/SFML/System/Export.hpp /usr/include/SFML/System/Time.hpp \
+ /usr/include/SFML/System/Err.hpp /usr/include/c++/11/ostream \
+ /usr/include/c++/11/ios /usr/include/c++/11/iosfwd \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -238,10 +238,4 @@ CMakeFiles/juego.dir/src/main.cpp.o: \
  /usr/include/SFML/Graphics/Glsl.hpp /usr/include/SFML/Graphics/Glsl.inl \
  /usr/include/SFML/Graphics/Sprite.hpp \
  /usr/include/SFML/Graphics/Text.hpp \
- /usr/include/SFML/Graphics/VertexBuffer.hpp /usr/include/c++/11/iostream \
- /usr/include/c++/11/istream /usr/include/c++/11/bits/istream.tcc \
- /usr/include/c++/11/sstream /usr/include/c++/11/bits/sstream.tcc \
- /home/ubuntu20/c++/gaamee-cc2/src/Item.h \
- /home/ubuntu20/c++/gaamee-cc2/src/Player.h \
- /home/ubuntu20/c++/gaamee-cc2/src/Fireball.h \
- /home/ubuntu20/c++/gaamee-cc2/src/Platform.h
+ /usr/include/SFML/Graphics/VertexBuffer.hpp

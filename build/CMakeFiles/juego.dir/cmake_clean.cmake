@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/juego.dir/src/Fireball.cpp.o"
   "CMakeFiles/juego.dir/src/Fireball.cpp.o.d"
+  "CMakeFiles/juego.dir/src/Item.cpp.o"
+  "CMakeFiles/juego.dir/src/Item.cpp.o.d"
   "CMakeFiles/juego.dir/src/Platform.cpp.o"
   "CMakeFiles/juego.dir/src/Platform.cpp.o.d"
   "CMakeFiles/juego.dir/src/Player.cpp.o"

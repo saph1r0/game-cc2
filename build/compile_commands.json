@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/ubuntu20/c++/gaamee-cc2/build",
+  "command": "/usr/bin/c++   -g -std=gnu++17 -o CMakeFiles/juego.dir/src/main.cpp.o -c /home/ubuntu20/c++/gaamee-cc2/src/main.cpp",
+  "file": "/home/ubuntu20/c++/gaamee-cc2/src/main.cpp",
+  "output": "CMakeFiles/juego.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/ubuntu20/c++/gaamee-cc2/build",
+  "command": "/usr/bin/c++   -g -std=gnu++17 -o CMakeFiles/juego.dir/src/Platform.cpp.o -c /home/ubuntu20/c++/gaamee-cc2/src/Platform.cpp",
+  "file": "/home/ubuntu20/c++/gaamee-cc2/src/Platform.cpp",
+  "output": "CMakeFiles/juego.dir/src/Platform.cpp.o"
+},
+{
+  "directory": "/home/ubuntu20/c++/gaamee-cc2/build",
+  "command": "/usr/bin/c++   -g -std=gnu++17 -o CMakeFiles/juego.dir/src/Player.cpp.o -c /home/ubuntu20/c++/gaamee-cc2/src/Player.cpp",
+  "file": "/home/ubuntu20/c++/gaamee-cc2/src/Player.cpp",
+  "output": "CMakeFiles/juego.dir/src/Player.cpp.o"
+},
+{
+  "directory": "/home/ubuntu20/c++/gaamee-cc2/build",
+  "command": "/usr/bin/c++   -g -std=gnu++17 -o CMakeFiles/juego.dir/src/Fireball.cpp.o -c /home/ubuntu20/c++/gaamee-cc2/src/Fireball.cpp",
+  "file": "/home/ubuntu20/c++/gaamee-cc2/src/Fireball.cpp",
+  "output": "CMakeFiles/juego.dir/src/Fireball.cpp.o"
+},
+{
+  "directory": "/home/ubuntu20/c++/gaamee-cc2/build",
+  "command": "/usr/bin/c++   -g -std=gnu++17 -o CMakeFiles/juego.dir/src/Item.cpp.o -c /home/ubuntu20/c++/gaamee-cc2/src/Item.cpp",
+  "file": "/home/ubuntu20/c++/gaamee-cc2/src/Item.cpp",
+  "output": "CMakeFiles/juego.dir/src/Item.cpp.o"
+}
+]
