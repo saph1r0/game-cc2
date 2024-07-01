@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/juego.dir/src/main.cpp.o CMakeFiles/juego.dir/src/Platform.cpp.o CMakeFiles/juego.dir/src/Player.cpp.o CMakeFiles/juego.dir/src/Fireball.cpp.o -o juego  /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
