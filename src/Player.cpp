@@ -210,3 +210,9 @@ void Player::resolvePlatformCollision(const Platform& platform) {
     sf::Vector2f Player::getVelocity() const {
         return velocity;
     }
+    void Player::collectItem() {
+    itemCount++;
+    }
+    int Player::getItemCount() const {
+        return itemCount;
+    }

@@ -23,6 +23,7 @@ private:
     int ammo;
     int playerNumber;
     int collisionCount;
+     int itemCount;
 
 public:
     Player(const std::string& textureFileRight, const std::string& textureFileLeft, sf::Vector2f position, int number);
@@ -38,6 +39,8 @@ public:
     void increaseCollisionCount();
     int getCollisionCount() const;
     sf::Vector2f getVelocity() const;
+    void collectItem(); 
+    int getItemCount() const; 
 };
 
 #endif // PLAYER_H
