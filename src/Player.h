@@ -26,11 +26,16 @@ private:
 
 public:
     Player(const std::string& textureFileRight, const std::string& textureFileLeft, sf::Vector2f position, int number);
-    void update(float deltaTime);
+    void update(float deltaTime, int SCREEN_HEIGHT, int SCREEN_WIDTH);
     void draw(sf::RenderWindow& window);
     sf::FloatRect getBounds() const;
+
+    //bool isOnGround(const std::vector<Platform>& platforms, const std::vector<Player>& players) const;
     void resolveCollision(Player& other);
     void resolvePlatformCollision(const Platform& platform);
+    
+
+
     void shoot(sf::Texture* fireballTexture, sf::Vector2f direction);
     void handleInput(sf::Keyboard::Key leftKey, sf::Keyboard::Key rightKey, sf::Keyboard::Key jumpKey, sf::Keyboard::Key attackKey, sf::Texture* fireballTexture);
     bool isColliding(const sf::FloatRect& other);
@@ -38,6 +43,8 @@ public:
     void increaseCollisionCount();
     int getCollisionCount() const;
     sf::Vector2f getVelocity() const;
+
+
 };
 
 #endif // PLAYER_H

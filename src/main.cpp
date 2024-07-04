@@ -6,32 +6,69 @@
 #include "Player.h"
 #include "Platform.h"
 
+
+
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "El Juego");
     sf::Font font;
-    font.loadFromFile("//home/ubuntu20/c++/game-cc2/images/Retro Gaming.ttf");
+    font.loadFromFile("/Users/Kathy/Documents/1. UNSA/2. AULA VIRTUAL/1. Ciencia de la Computacion II/JUEGO_UPDATE/images/Retro Gaming.ttf");
 
     sf::Texture playerTextureRight;
     sf::Texture playerTextureLeft;
     sf::Texture fireballTexture;
-    sf::Texture backgroundTexture;
+    
+    playerTextureRight.loadFromFile("/Users/Kathy/Documents/1. UNSA/2. AULA VIRTUAL/1. Ciencia de la Computacion II/JUEGO_UPDATE/images/AnimationSheetderecha.png");
+    playerTextureLeft.loadFromFile("/Users/Kathy/Documents/1. UNSA/2. AULA VIRTUAL/1. Ciencia de la Computacion II/JUEGO_UPDATE/images/AnimationSheetizq.png");
+    fireballTexture.loadFromFile("/Users/Kathy/Documents/1. UNSA/2. AULA VIRTUAL/1. Ciencia de la Computacion II/JUEGO_UPDATE/images/Fireball Spritesheet.png");
 
-    backgroundTexture.loadFromFile("//home/ubuntu20/c++/game-cc2/images/Space Background.png");
-    sf::Sprite backgroundSprite;
-    backgroundSprite.setTexture(backgroundTexture);
+    Player player1("/Users/Kathy/Documents/1. UNSA/2. AULA VIRTUAL/1. Ciencia de la Computacion II/JUEGO_UPDATE/images/AnimationSheetderecha.png", "/Users/Kathy/Documents/1. UNSA/2. AULA VIRTUAL/1. Ciencia de la Computacion II/JUEGO_UPDATE/images/AnimationSheetizq.png", sf::Vector2f(100.0f, 400.0f), 1);
+    Player player2("/Users/Kathy/Documents/1. UNSA/2. AULA VIRTUAL/1. Ciencia de la Computacion II/JUEGO_UPDATE/images/AnimationSheetderecha.png", "/Users/Kathy/Documents/1. UNSA/2. AULA VIRTUAL/1. Ciencia de la Computacion II/JUEGO_UPDATE/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2);
 
-    playerTextureRight.loadFromFile("//home/ubuntu20/c++/game-cc2/images/AnimationSheetderecha.png");
-    playerTextureLeft.loadFromFile("//home/ubuntu20/c++/game-cc2/images/AnimationSheetizq.png");
-    fireballTexture.loadFromFile("//home/ubuntu20/c++/game-cc2/images/Fireball Spritesheet.png");
+    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+    int SCREEN_WIDTH = desktop.width - 95;
+    int SCREEN_HEIGHT = desktop.height - 95;
+    const int TILE_SIZE = 32; // Tamaño de las plataformas en píxeles
 
-    Player player1("//home/ubuntu20/c++/game-cc2/images/AnimationSheetderecha.png", "//home/ubuntu20/c++/game-cc2/images/AnimationSheetizq.png", sf::Vector2f(100.0f, 400.0f), 1);
-    Player player2("//home/ubuntu20/c++/game-cc2/images/AnimationSheetderecha.png", "//home/ubuntu20/c++/game-cc2/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2);
+    // Definición del nivel como cadena de caracteres
+    const std::string level =
+        "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^...^^^^^^^^^^^^"
+        "^......................................................^"
+        "^......................................................^"
+        "^......................................................^"
+        "^......................................................^"
+        "^...^^^....^^..^....^^^....^^^....^^^.....^^^...^......^"
+        "^......................................................^"
+        "^......................................................^"
+        "^..........................................^...........^"      
+        "^......................................................^"
+        "^.....^..^^^^..^...............^.....^..^....^.........^"
+        "^......................................................^"
+        "^......................................................^"
+        "^........................-.............................^"
+        "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^";
 
+    const int LEVEL_WIDTH = 56; // Ancho del nivel en número de baldosas
+    const int LEVEL_HEIGHT = 15; // Alto del nivel en número de baldosas
+
+    const int LEVEL_PIXEL_WIDTH = LEVEL_WIDTH * TILE_SIZE;
+    const int LEVEL_PIXEL_HEIGHT = LEVEL_HEIGHT * TILE_SIZE;
+
+    int mapOffsetX = (SCREEN_WIDTH - LEVEL_PIXEL_WIDTH) / 2;
+    int mapOffsetY = (SCREEN_HEIGHT - LEVEL_PIXEL_HEIGHT) / 2;
+
+    // Crear plataformas según el nivel definido
     std::vector<Platform> platforms;
-    platforms.push_back(Platform(sf::Vector2f(200.0f, 20.0f), sf::Vector2f(300.0f, 400.0f)));
-    platforms.push_back(Platform(sf::Vector2f(200.0f, 20.0f), sf::Vector2f(0.0f, 500.0f)));
-    platforms.push_back(Platform(sf::Vector2f(300.0f, 20.0f), sf::Vector2f(500.0f, 300.0f)));
-    platforms.push_back(Platform(sf::Vector2f(100.0f, 20.0f), sf::Vector2f(100.0f, 100.0f) ));
+    for (int y = 0; y < LEVEL_HEIGHT; ++y) {
+        for (int x = 0; x < LEVEL_WIDTH; ++x) {
+            char tile = level[y * LEVEL_WIDTH + x];
+            if (tile != '.') {
+                sf::Vector2f position(x * TILE_SIZE + mapOffsetX, y * TILE_SIZE + mapOffsetY);
+                platforms.push_back(Platform(sf::Vector2f(TILE_SIZE, TILE_SIZE), position));
+            }
+        }
+    }
+
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Game");
+
 
     sf::Clock clock;
 
@@ -46,15 +83,22 @@ int main() {
         player1.handleInput(sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::W, sf::Keyboard::F, &fireballTexture);
         player2.handleInput(sf::Keyboard::Left, sf::Keyboard::Right, sf::Keyboard::Up, sf::Keyboard::Space, &fireballTexture);
 
-        player1.update(deltaTime);
-        player2.update(deltaTime);
+        player1.update(deltaTime, SCREEN_HEIGHT, SCREEN_WIDTH);
+        player2.update(deltaTime, SCREEN_HEIGHT, SCREEN_WIDTH);
+
+        std::vector<Player> players;
+
+        players.push_back(player1);
+        players.push_back(player2);
+
+
+        player1.resolveCollision(player2);
+        player2.resolveCollision(player1);
 
         for (auto& platform : platforms) {
             player1.resolvePlatformCollision(platform);
             player2.resolvePlatformCollision(platform);
         }
-        player1.resolveCollision(player2);
-        player2.resolveCollision(player1);
 
         // Check for fireball collisions
         for (auto& fireball : player1.getFireballs()) {
@@ -72,7 +116,6 @@ int main() {
         }
 
         window.clear();
-        window.draw(backgroundSprite);
 
         for (auto& platform : platforms) {
             platform.draw(window);
