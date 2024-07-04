@@ -7,7 +7,7 @@ Item::Item(const sf::Texture& texture, const sf::IntRect& rect, const sf::Vector
     sprite.setScale(scale, scale); 
 }
 
-void Item::draw(sf::RenderWindow& window) const { // Aquí agregamos const
+void Item::draw(sf::RenderWindow& window) const { 
     window.draw(sprite);
 }
 sf::FloatRect Item::getBounds() const {

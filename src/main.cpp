@@ -8,7 +8,7 @@
 #include "Platform.h"
 
 void createItems(const sf::Texture& texture, std::vector<Item>& items, int itemWidth, int itemHeight, int numItems, const sf::Vector2u& windowSize, const std::vector<Platform>& platforms, float scale) {
-    std::srand(static_cast<unsigned int>(std::time(nullptr)));  // Inicializa la semilla para los números aleatorios
+    std::srand(static_cast<unsigned int>(std::time(nullptr))); 
 
     for (int i = 0; i < numItems; ++i) {
         int x = (i * itemWidth) % texture.getSize().x;
@@ -18,7 +18,6 @@ void createItems(const sf::Texture& texture, std::vector<Item>& items, int itemW
         const Platform& platform = platforms[std::rand() % platforms.size()];
         sf::FloatRect bounds = platform.getBounds();
 
-        // Generar posición dentro del rango de la plataforma
         float posX = bounds.left + static_cast<float>(std::rand() % static_cast<int>(bounds.width - itemWidth));
         float posY = bounds.top - itemHeight; // Arriba de la plataforma
 
@@ -65,7 +64,7 @@ int main() {
 
     const int itemWidth = 64;  // ancho
     const int itemHeight = 64; // altura
-    const int numItems = 15;   // número de ítems
+    const int numItems = 5;   // número de ítems
     const float itemScale = 0.5f;
 
     std::vector<Item> items;
@@ -154,11 +153,11 @@ int main() {
 
         std::stringstream ss;
         ss << "Player 1 Collisions: " << player1.getCollisionCount() << "\n";
-        ss << "Player 1 Velocity: (" << player1.getVelocity().x << ", " << player1.getVelocity().y << ")\n";
+       // ss << "Player 1 Velocity: (" << player1.getVelocity().x << ", " << player1.getVelocity().y << ")\n";
         ss << "Player 1 Items: " << player1.getItemCount() << "\n";
         
         ss << "Player 2 Collisions: " << player2.getCollisionCount() << "\n";
-        ss << "Player 2 Velocity: (" << player2.getVelocity().x << ", " << player2.getVelocity().y << ")\n";
+      //  ss << "Player 2 Velocity: (" << player2.getVelocity().x << ", " << player2.getVelocity().y << ")\n";
         ss << "Player 2 Items: " << player2.getItemCount() << "\n";
 
         text.setString(ss.str());

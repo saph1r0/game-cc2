@@ -23,7 +23,7 @@ private:
     int ammo;
     int playerNumber;
     int collisionCount;
-     int itemCount;
+     int itemCount=0;
 
 public:
     Player(const std::string& textureFileRight, const std::string& textureFileLeft, sf::Vector2f position, int number);
