@@ -5,9 +5,16 @@
 #include <vector>
 #include "Fireball.h"
 #include "Platform.h"
-//#include "CollisionManager.h"
 
-class Player{
+
+class Observer {
+public:
+    virtual ~Observer() {}
+    virtual void itemCounter(int item) = 0;
+    virtual void collisionCounter(int collision) = 0;
+};
+
+class Player: public Observer{
 private:
     sf::Sprite sprite;
     sf::Texture textureRight;
@@ -24,13 +31,18 @@ private:
     int ammo;
     int playerNumber;
     int collisionCount;
-     int itemCount=0;
+    int itemCount;
 
 public:
     Player(const std::string& textureFileRight, const std::string& textureFileLeft, sf::Vector2f position, int number);
     void update(float deltaTime, int SCREEN_HEIGHT, int SCREEN_WIDTH);
     void draw(sf::RenderWindow& window);
     sf::FloatRect getBounds() const;
+
+//////////////////////////OBSERVER////////////////////////////////////////////////////////////
+    void collisionCounter(int collision) override;
+    void itemCounter(int item) override;
+//////////////////////////////////////////////////////////////////////////////////////
 
     void resolveCollision(Player& other);
     void resolvePlatformCollision(const Platform& platform);
@@ -39,10 +51,7 @@ public:
     void handleInput(sf::Keyboard::Key leftKey, sf::Keyboard::Key rightKey, sf::Keyboard::Key jumpKey, sf::Keyboard::Key attackKey, sf::Texture* fireballTexture);
     bool isColliding(const sf::FloatRect& other);
     std::vector<Fireball>& getFireballs();
-    void increaseCollisionCount();
-    int getCollisionCount() const;
-    void collectItem(); 
-    int getItemCount() const; 
+
 };
 
 #endif // PLAYER_H
