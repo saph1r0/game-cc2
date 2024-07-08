@@ -5,8 +5,10 @@
 #include <ctime>
 #include "Item.h"
 #include "Player.h"
+#include "Subject.h"
 #include "Platform.h"
-//#include "CollisionManager.h"
+#include <algorithm>
+
 
 void createItems(const sf::Texture& texture, std::vector<Item>& items, int itemWidth, int itemHeight, int numItems, const sf::Vector2u& windowSize, const std::vector<Platform>& platforms, float scale) {
     std::srand(static_cast<unsigned int>(std::time(nullptr))); 
@@ -66,19 +68,19 @@ int main() {
     // Definición del nivel como cadena de caracteres
     const std::string level =
         "..................................................."
-        "^.................................................^"
-        "^.........^^^......^^^^^^^^^^^^^^^^^^.............^"
-        "^.................................................^"
-        "^...^^^...................................^^^^^^^.^"
-        "^.................................................^"
-        "^..........^^^....................^^^^^^^^^^^^....^"
-        "^.................................................^"
-        "^................^^^^^^^^^^^^.....................^"      
-        "^.................................................^"
-        "^^^^^^^^^^^^^.....................................^"
-        "^.................................................^"
-        "^..............^^^^^^^^^^^^.......................^"
-        "^...............................^^^^^^^^^^^^^^^^^^^"
+        "..................................................."
+        "..........^^^......^^^^^^^^^^^^^^^^^^.............."
+        "..................................................."
+        "....^^^...................................^^^^^^^.."
+        "..................................................."
+        "...........^^^.................^^^^^^^^^^^^........"
+        "..................................................."
+        ".................^^^^^^^^^^^^......................"      
+        "..................................................."
+        ".^^^^^^^^^^^^......................................"
+        "..................................................."
+        "...............^^^^^^^^^^^^........................"
+        "................................^^^^^^^^^^^^^^^^^^."
         "..................................................."
         "..................................................."
         ".........................^^^^......................";
@@ -117,6 +119,22 @@ int main() {
 
     sf::Clock clock;
 
+    ////////////////////////////////OBSERVER///////////////////////////////////////////////////
+        Subject gameSubject1;
+        Subject gameSubject2;
+
+        gameSubject1.addObserver(&player1);
+        gameSubject2.addObserver(&player2);
+
+        gameSubject1.setItem(0);
+        gameSubject1.setCollision(0);
+
+        gameSubject2.setItem(0);
+        gameSubject2.setCollision(0);
+
+    ////////////////////////////////////////////////////////////////////////////////////
+
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -144,17 +162,18 @@ int main() {
         player1.resolveCollision(player2);
         player2.resolveCollision(player1);
 
+
         // Verificar colisiones de las bolas de fuego
         for (auto& fireball : player1.getFireballs()) {
             if (fireball.isColliding(player2.getBounds())) {
-                player2.increaseCollisionCount();
+                gameSubject2.addCollision();
                 fireball.setToBeDestroyed(true);
             }
         }
 
         for (auto& fireball : player2.getFireballs()) {
             if (fireball.isColliding(player1.getBounds())) {
-                player1.increaseCollisionCount();
+                gameSubject1.addCollision();
                 fireball.setToBeDestroyed(true);
             }
         }
@@ -165,7 +184,7 @@ int main() {
         // Verificar colisiones con ítems y recolectarlos
         for (auto it = items.begin(); it != items.end();) {
             if (player1.isColliding(it->getBounds())) {
-                player1.collectItem();
+                gameSubject1.addItem();
                 it = items.erase(it);
             } else {
                 ++it;
@@ -174,7 +193,7 @@ int main() {
 
         for (auto it = items.begin(); it != items.end();) {
             if (player2.isColliding(it->getBounds())) {
-                player2.collectItem();
+                gameSubject2.addItem();
                 it = items.erase(it);
             } else {
                 ++it;
@@ -190,6 +209,7 @@ int main() {
             platform.draw(window);
         }
 
+
         player1.draw(window);
         player2.draw(window);
 
@@ -200,14 +220,27 @@ int main() {
         text.setFillColor(sf::Color::White);
 
         std::stringstream ss;
-        ss << player1Name << " Collisions: " << player1.getCollisionCount() << "\n";
-        ss << player1Name << " Items: " << player1.getItemCount() << "\n";
-        ss << player1Name << " Collisions: " << player2.getCollisionCount() << "\n";
-        ss << player2Name << " Items: " << player2.getItemCount() << "\n";
+        ss << player1Name << " Collisions: " << gameSubject1.getCollision() << "\n";
+        ss << player1Name << " Items: " << gameSubject1.getItem() << "\n";
+
+        sf::Text text2;
+        text2.setFont(font);
+        text2.setCharacterSize(20);
+        text2.setFillColor(sf::Color::White);
+        
+        std::stringstream sss;
+        sss << player2Name << " Collisions: " << gameSubject2.getCollision() << "\n";
+        sss << player2Name << " Items: " << gameSubject2.getItem() << "\n";
 
         text.setString(ss.str());
         text.setPosition(10, 10);
+        
+        text2.setString(sss.str());
+        text2.setPosition(800, 10);
+
+
         window.draw(text);
+        window.draw(text2);
 
         window.display();
     }
