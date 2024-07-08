@@ -8,7 +8,7 @@ const float MOVE_SPEED = 200.0f;
 
 
     Player::Player(const std::string& textureFileRight, const std::string& textureFileLeft, sf::Vector2f position, int number)
-        : velocity(0.0f, 0.0f), isJumping(false), currentFrame(0), frameTime(0.09f), timeSinceLastFrame(0.0f), shootTimer(0), ammo(5), playerNumber(number), collisionCount(0)
+        : velocity(0.0f, 0.0f), isJumping(false), currentFrame(0), frameTime(0.09f), timeSinceLastFrame(0.0f), shootTimer(0), ammo(5), playerNumber(number)
     {
         textureRight.loadFromFile(textureFileRight);
         textureLeft.loadFromFile(textureFileLeft);
@@ -128,6 +128,15 @@ const float MOVE_SPEED = 200.0f;
     sf::FloatRect Player::getBounds() const {
         return sprite.getGlobalBounds();
     }
+///////////////////////OBSERVER///////////////////////////////////////////////////////////////
+    void Player::collisionCounter(int collision){
+        collisionCount = collision;
+    }
+    void Player::itemCounter(int item){
+        itemCount = item;
+    }
+//////////////////////////////////////////////////////////////////////////////////////
+
     void Player::resolvePlatformCollision(const Platform& platform) {
         if (getBounds().intersects(platform.getBounds())) {
             sf::FloatRect playerBounds = getBounds();
@@ -202,28 +211,11 @@ const float MOVE_SPEED = 200.0f;
         }
     }
 
-    
-
 
     std::vector<Fireball>& Player::getFireballs() {
         return fireballs;
     }
 
-    void Player::increaseCollisionCount() {
-        collisionCount++;
-    }
-
-    int Player::getCollisionCount() const {
-        return collisionCount;
-    }
-
     bool Player::isColliding(const sf::FloatRect& other) {
         return sprite.getGlobalBounds().intersects(other);
-    }
-
-    void Player::collectItem() {
-    itemCount++;
-    }
-    int Player::getItemCount() const {
-        return itemCount;
     }
