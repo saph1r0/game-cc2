@@ -113,7 +113,7 @@ const float MOVE_SPEED = 200.0f;
         shootTimer++; ///si llega a 40 espera algo //FALTA
 
         for (auto& fireball : fireballs) {
-            fireball.update(deltaTime);
+            fireball.update(deltaTime,SCREEN_HEIGHT,SCREEN_WIDTH);
         }
         fireballs.erase(std::remove_if(fireballs.begin(), fireballs.end(), [](const Fireball& fb) { return fb.getToBeDestroyed(); }), fireballs.end());
     }
