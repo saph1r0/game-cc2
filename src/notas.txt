@@ -1,0 +1,3 @@
+1.- Escenario más adecuado para pruebas y dimensiones levemente cambiadas.
+2.- Se añadieron nombres de los jugadores encima de los sprites para diferencias jugadores
+3.- Función de creación de items convertida en na factory(Patron de diseño
