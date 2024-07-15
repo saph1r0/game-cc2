@@ -16,7 +16,7 @@
         }
         frameCount = 0;
     }
-    void Fireball::update(float deltaTime) {
+    void Fireball::update(float deltaTime, int SCREEN_HEIGHT, int SCREEN_WIDTH) {
         sprite.move(direction); //mover n direccion
         frameCount++;
         if (frameCount >= 10) {
@@ -27,7 +27,7 @@
             toBeDestroyed = true;
         }
         sf::Vector2f pos = sprite.getPosition();
-        if (pos.x < 0 || pos.y < 0 || pos.x > 800 || pos.y > 600) {
+        if (pos.x < 0 || pos.y < 0 || pos.x > SCREEN_WIDTH || pos.y > SCREEN_HEIGHT) {
             toBeDestroyed = true;
         }
     }
