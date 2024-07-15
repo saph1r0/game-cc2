@@ -14,7 +14,7 @@ private:
 
 public:
     Fireball(sf::Texture* tex, sf::IntRect texPos, int own, sf::Vector2f pos, sf::Vector2f dir, int startPow);
-    void update(float deltaTime);
+    void update(float deltaTime, int SCREEN_HEIGHT, int SCREEN_WIDTH);
     bool isColliding(const sf::FloatRect& other);
     sf::Sprite& getSprite();
     int getPower() const;
