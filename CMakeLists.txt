@@ -1,10 +1,12 @@
+# Minimum version number
 cmake_minimum_required(VERSION 3.10)
 
 set(SOURCE_DIR src)
 
 project(Juego)
-
-set(SFML_DIR "\\Users\\Kathy\\Documents\\1. UNSA\\2. AULA VIRTUAL\\1. Ciencia de la Computacion II\\Wizard-Training-Game-master\\SFML\\lib\\cmake\\SFML")
+# Especificar el estándar de C++
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 

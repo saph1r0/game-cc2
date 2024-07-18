@@ -223,7 +223,7 @@ public:
             */
         }
 
-        if (!transitionTexture.loadFromFile("/directorio/game-cc2/images/cargando.png")) {
+        if (!transitionTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/cargando.png")) {
             std::cerr << "Error: Failed to load transition texture!" << std::endl;
             exit(EXIT_FAILURE);
         }

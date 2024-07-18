@@ -63,17 +63,17 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Game");
 
     sf::Texture itemTexture;
-    if (!itemTexture.loadFromFile("/directorio/game-cc2/images/spritesheet.png")) {
+    if (!itemTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/spritesheet.png")) {
         return -1;
     }
 
     sf::Font font;
-    if (!font.loadFromFile("/directorio/game-cc2/images/Retro Gaming.ttf")) {
+    if (!font.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/Retro Gaming.ttf")) {
         return -1;
     }
 
     sf::Texture fireballTexture;
-    if (!fireballTexture.loadFromFile("/directorio/game-cc2/images/Fireball Spritesheet.png")) {
+    if (!fireballTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/Fireball Spritesheet.png")) {
         return -1;
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,8 +93,8 @@ int main() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     std::vector<Player> players;
     
-    Player player1("/directorio/game-cc2/images/AnimationSheetderecha.png", "/directorio/game-cc2/images/AnimationSheetizq.png", sf::Vector2f(100.0f, 0.0f), 1 ,player1Name, font);
-    Player player2("/directorio/game-cc2/images/AnimationSheetderecha.png", "/directorio/game-cc2/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2 ,player2Name, font);
+    Player player1("/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetderecha.png", "/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetizq.png", sf::Vector2f(100.0f, 0.0f), 1 ,player1Name, font);
+    Player player2("/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetderecha.png", "/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2 ,player2Name, font);
     players.push_back(player1);
     players.push_back(player2);
 
@@ -177,8 +177,8 @@ int main() {
                 }else{
                     level.loadLevel(mapOffsetX, mapOffsetY,temporal); ///here
                     ItemFactory::createItems(itemTexture, items, itemWidth, itemHeight, numItems, level.getPlatforms(), itemScale);
-                    Player player1("/directorio/game-cc2/images/AnimationSheetderecha.png", "/directorio/game-cc2/images/AnimationSheetizq.png", sf::Vector2f(100.0f, 0.0f), 1 ,player1Name, font);
-                    Player player2("/directorio/game-cc2/images/AnimationSheetderecha.png", "/directorio/game-cc2/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2 ,player2Name, font);
+                    Player player1("/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetderecha.png", "/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetizq.png", sf::Vector2f(100.0f, 0.0f), 1 ,player1Name, font);
+                    Player player2("/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetderecha.png", "/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2 ,player2Name, font);
 
                 }
             }

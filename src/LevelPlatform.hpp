@@ -15,7 +15,7 @@ public:
     LevelPlatform(sf::Vector2f size, sf::Vector2f position, Platform* platform = nullptr)
         : PlatformDecorator(size, position, platform ? platform : new DefaultPlatform(size, position)) {
 
-        if (!levelTexture.loadFromFile("/Users/Kathy/Documents/juego/imagenes/Qcmqvn.png")) {
+        if (!levelTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/Qcmqvn.png")) {
             std::cerr << "Error: Failed to load level texture!" << std::endl;
             exit(EXIT_FAILURE);
         }
