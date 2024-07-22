@@ -13,7 +13,8 @@
 class Level {
 private:
     std::vector<Platform*> platforms;
-    const int TILE_SIZE = 32;
+    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+    const int TILE_SIZE = desktop.width/60;
     const int LEVEL_WIDTH = 56;
     const int LEVEL_HEIGHT = 15;
     std::vector<std::string> levels;

@@ -4,12 +4,15 @@
 #include <sstream>
 #include <ctime>
 #include <algorithm>
+
 #include "ItemFactory.h"
 #include "Item.h"
 #include "Player.h"
 #include "Subject.h"
 #include "Platform.hpp"
 #include "Level.hpp" //esta añadiendo level.hpp
+#include "Enemy.h"
+#include "FireballAttack.hpp"
 
 /*
 void createItems(const sf::Texture& texture, std::vector<Item>& items, int itemWidth, int itemHeight, int numItems, const sf::Vector2u& windowSize, const std::vector<Platform>& platforms, float scale) {
@@ -63,7 +66,7 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Game");
 
     sf::Texture itemTexture;
-    if (!itemTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/spritesheet.png")) {
+    if (!itemTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/spritesheet(1).png")) {
         return -1;
     }
 
