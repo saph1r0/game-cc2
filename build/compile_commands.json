@@ -40,5 +40,11 @@
   "command": "/usr/bin/c++   -g -std=gnu++17 -o CMakeFiles/Juego.dir/src/ItemFactory.cpp.o -c /home/ubuntu20/c++/gaamee-cc2/src/ItemFactory.cpp",
   "file": "/home/ubuntu20/c++/gaamee-cc2/src/ItemFactory.cpp",
   "output": "CMakeFiles/Juego.dir/src/ItemFactory.cpp.o"
+},
+{
+  "directory": "/home/ubuntu20/c++/gaamee-cc2/build",
+  "command": "/usr/bin/c++   -g -std=gnu++17 -o CMakeFiles/Juego.dir/src/Enemy.cpp.o -c /home/ubuntu20/c++/gaamee-cc2/src/Enemy.cpp",
+  "file": "/home/ubuntu20/c++/gaamee-cc2/src/Enemy.cpp",
+  "output": "CMakeFiles/Juego.dir/src/Enemy.cpp.o"
 }
 ]

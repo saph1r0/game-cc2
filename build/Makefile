@@ -129,6 +129,30 @@ Juego/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Juego.dir/build.make CMakeFiles/Juego.dir/build
 .PHONY : Juego/fast
 
+src/Enemy.o: src/Enemy.cpp.o
+.PHONY : src/Enemy.o
+
+# target to build an object file
+src/Enemy.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Juego.dir/build.make CMakeFiles/Juego.dir/src/Enemy.cpp.o
+.PHONY : src/Enemy.cpp.o
+
+src/Enemy.i: src/Enemy.cpp.i
+.PHONY : src/Enemy.i
+
+# target to preprocess a source file
+src/Enemy.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Juego.dir/build.make CMakeFiles/Juego.dir/src/Enemy.cpp.i
+.PHONY : src/Enemy.cpp.i
+
+src/Enemy.s: src/Enemy.cpp.s
+.PHONY : src/Enemy.s
+
+# target to generate assembly for a file
+src/Enemy.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Juego.dir/build.make CMakeFiles/Juego.dir/src/Enemy.cpp.s
+.PHONY : src/Enemy.cpp.s
+
 src/Fireball.o: src/Fireball.cpp.o
 .PHONY : src/Fireball.o
 
@@ -306,6 +330,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Juego"
+	@echo "... src/Enemy.o"
+	@echo "... src/Enemy.i"
+	@echo "... src/Enemy.s"
 	@echo "... src/Fireball.o"
 	@echo "... src/Fireball.i"
 	@echo "... src/Fireball.s"

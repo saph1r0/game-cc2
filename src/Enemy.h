@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "AttackStrategy.h"
+#include "FireballAttack.hpp"
 
 class Enemy {
 protected:
@@ -16,7 +17,7 @@ public:
 
     void draw(sf::RenderWindow& window);
 
-    void update(float deltaTime);
+    void update(float deltaTime,int SCREEN_HEIGHT, int SCREEN_WIDTH);
 
     ~Enemy();
 };
