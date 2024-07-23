@@ -1,3 +1,0 @@
-/home/ubuntu20/c++/gaamee-cc2/build/CMakeFiles/Juego.dir
-/home/ubuntu20/c++/gaamee-cc2/build/CMakeFiles/edit_cache.dir
-/home/ubuntu20/c++/gaamee-cc2/build/CMakeFiles/rebuild_cache.dir

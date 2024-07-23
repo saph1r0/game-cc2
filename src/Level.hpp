@@ -13,8 +13,7 @@
 class Level {
 private:
     std::vector<Platform*> platforms;
-    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-    const int TILE_SIZE = desktop.width/60;
+    const int TILE_SIZE = 32;
     const int LEVEL_WIDTH = 56;
     const int LEVEL_HEIGHT = 15;
     std::vector<std::string> levels;
@@ -224,7 +223,7 @@ public:
             */
         }
 
-        if (!transitionTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/cargando.png")) {
+        if (!transitionTexture.loadFromFile("/directorio/game-cc2/images/cargando.png")) {
             std::cerr << "Error: Failed to load transition texture!" << std::endl;
             exit(EXIT_FAILURE);
         }
