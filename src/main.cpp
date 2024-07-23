@@ -11,6 +11,9 @@
 #include "Platform.hpp"
 #include "Level.hpp" //esta añadiendo level.hpp
 #include "Strategy.hpp"
+#include <thread>//theads
+#include <mutex>
+
 
 /*
 void createItems(const sf::Texture& texture, std::vector<Item>& items, int itemWidth, int itemHeight, int numItems, const sf::Vector2u& windowSize, const std::vector<Platform>& platforms, float scale) {
@@ -44,6 +47,8 @@ enum GameState {
 
 int main() {
 
+    std::mutex mtx; // Mutex para sincronización de acceso a datos compartidos
+
     std::string player1Name, player2Name;
 
     std::cout << "Nombre de Jugador 1: ";
@@ -64,17 +69,16 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Game");
 
     sf::Texture itemTexture;
-    if (!itemTexture.loadFromFile("/directorio/game-cc2/images/spritesheet.png")) {
+    if (!itemTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/spritesheet.png")) {
         return -1;
     }
-
     sf::Font font;
-    if (!font.loadFromFile("/directorio/game-cc2/images/Retro Gaming.ttf")) {
+    if (!font.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/Retro Gaming.ttf")) {
         return -1;
     }
 
     sf::Texture fireballTexture;
-    if (!fireballTexture.loadFromFile("/directorio/game-cc2/images/Fireball Spritesheet.png")) {
+    if (!fireballTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/Fireball Spritesheet.png")) {
         return -1;
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,8 +98,8 @@ int main() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     std::vector<Player> players;
     
-    Player player1("/directorio/game-cc2/images/AnimationSheetderecha.png", "/directorio/game-cc2/images/AnimationSheetizq.png", sf::Vector2f(100.0f, 0.0f), 1 ,player1Name, font);
-    Player player2("/directorio/game-cc2/images/AnimationSheetderecha.png", "/directorio/game-cc2/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2 ,player2Name, font);
+    Player player1("/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetderecha.png", "/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetizq.png", sf::Vector2f(100.0f, 0.0f), 1 ,player1Name, font);
+    Player player2("/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetderecha.png", "/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2 ,player2Name, font);
     players.push_back(player1);
     players.push_back(player2);
 
@@ -136,6 +140,27 @@ int main() {
             text2.setCharacterSize(20);
             text2.setFillColor(sf::Color::White);
     ////////////////////////////////////////////////////////////////////////////////////
+    //theads
+    float deltaTime = 0.0f;
+
+    // Crear hilos para actualizar los jugadores
+    std::thread player1Thread([&]() {
+        while (window.isOpen()) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Aproximadamente 60 FPS
+            std::unique_lock<std::mutex> lock(mtx);
+            player1.update(deltaTime, SCREEN_HEIGHT, SCREEN_WIDTH);
+        }
+    });
+
+    std::thread player2Thread([&]() {
+        while (window.isOpen()) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Aproximadamente 60 FPS
+            std::unique_lock<std::mutex> lock(mtx);
+            player2.update(deltaTime, SCREEN_HEIGHT, SCREEN_WIDTH);
+        }
+    });
+
+    /////////////////////////////////////////////////////////////////////////////////
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -159,6 +184,8 @@ int main() {
         }
 
         float deltaTime = clock.restart().asSeconds();
+        std::unique_lock<std::mutex> lock(mtx);
+
         std::string winnerName;
         if(gameState == PLAYING){
             player1.handleInput(sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::W, sf::Keyboard::F, &fireballTexture);
@@ -182,8 +209,8 @@ int main() {
                 }else{
                     level.loadLevel(mapOffsetX, mapOffsetY,temporal); ///here
                     ItemFactory::createItems(itemTexture, items, itemWidth, itemHeight, numItems, level.getPlatforms(), itemScale);
-                    Player player1("/directorio/game-cc2/images/AnimationSheetderecha.png", "/directorio/game-cc2/images/AnimationSheetizq.png", sf::Vector2f(100.0f, 0.0f), 1 ,player1Name, font);
-                    Player player2("/directorio/game-cc2/images/AnimationSheetderecha.png", "/directorio/game-cc2/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2 ,player2Name, font);
+                    Player player1("/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetderecha.png", "/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetizq.png", sf::Vector2f(100.0f, 0.0f), 1 ,player1Name, font);
+                    Player player2("/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetderecha.png", "/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2 ,player2Name, font);
 
                 }
             }
@@ -269,10 +296,13 @@ int main() {
         } else if(gameState == WIN){
             window.draw(winText);
         }
-
+        lock.unlock();
         window.display();
     }
-
+    
+    // Esperar a que los hilos terminen
+    player1Thread.join();
+    player2Thread.join();
     return 0;
 }
 
