@@ -1,0 +1,1 @@
+Se creó un nuevo objeto llamado nitem el cual resta el contador de items del jugador, no pude hacer que compile, ademas que Item Factory se encarga de crear "Nitems"
