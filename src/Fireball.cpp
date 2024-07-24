@@ -13,6 +13,8 @@
         sprite.setScale(0.75f, 0.75f);
         if (ownerPlayerNum == 1) { //jugador
             sprite.setColor(sf::Color::Blue);
+        }else if(ownerPlayerNum ==3){
+            sprite.setColor(sf::Color::Green);
         }
         frameCount = 0;
     }
@@ -39,3 +41,7 @@
     int Fireball::getOwnerPlayerNum() const { return ownerPlayerNum; }
     bool Fireball::getToBeDestroyed() const { return toBeDestroyed; }
     void Fireball::setToBeDestroyed(bool val) { toBeDestroyed = val; }
+    
+    sf::FloatRect Fireball::getBounds() const {
+        return sprite.getGlobalBounds();
+    }

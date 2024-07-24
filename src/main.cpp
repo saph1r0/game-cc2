@@ -11,6 +11,8 @@
 #include "Platform.hpp"
 #include "Level.hpp" //esta añadiendo level.hpp
 #include "Strategy.hpp"
+#include <thread>//theads
+#include <mutex>
 
 /*
 void createItems(const sf::Texture& texture, std::vector<Item>& items, int itemWidth, int itemHeight, int numItems, const sf::Vector2u& windowSize, const std::vector<Platform>& platforms, float scale) {
@@ -43,7 +45,7 @@ enum GameState {
 
 
 int main() {
-
+    std::mutex mtx; // Mutex para sincronización de acceso a datos compartidos
     std::string player1Name, player2Name;
 
     std::cout << "Nombre de Jugador 1: ";
@@ -58,6 +60,9 @@ int main() {
 
     int mapOffsetX = (SCREEN_WIDTH - 56 * 32) / 2;
     int mapOffsetY = (SCREEN_HEIGHT - 15 * 32) / 2;
+
+    std::cout<<"h: "<<SCREEN_HEIGHT<<std::endl;
+    std::cout<<"w: "<<SCREEN_WIDTH<<std::endl;
 
     Level level(mapOffsetX, mapOffsetY, SCREEN_WIDTH, SCREEN_HEIGHT); ////////////////OBJECTO LEVEL
 
@@ -99,7 +104,7 @@ int main() {
     players.push_back(player1);
     players.push_back(player2);
 
-    Context* context = new Context(new fireballNormal() );
+    Context* context = new Context(new fireballCostados());
 
     const int itemWidth = 64;  // ancho
     const int itemHeight = 64; // altura
@@ -116,15 +121,24 @@ int main() {
     ////////////////////////////////OBSERVER///////////////////////////////////////////////////
         Subject gameSubject1;
         Subject gameSubject2;
+        //Subject enemyAtack;
 
         gameSubject1.addObserver(&player1);
         gameSubject2.addObserver(&player2);
 
+        //enemyAtack.addObserver(&player1);
+        //enemyAtack.addObserver(&player2);
+
         gameSubject1.setItem(0);
         gameSubject1.setCollision(0);
+        gameSubject1.setHealth(10); //20vidas para mejor oportunidad de terminar juego
 
         gameSubject2.setItem(0);
         gameSubject2.setCollision(0);
+        gameSubject2.setHealth(10);
+
+        //enemyAtack.setItem(0);
+        //enemyAtack.setCollision(0);
 
     ////////////////////////////////////////////////////////////////////////////////////
     sf::Text text;
@@ -136,6 +150,36 @@ int main() {
             text2.setCharacterSize(20);
             text2.setFillColor(sf::Color::White);
     ////////////////////////////////////////////////////////////////////////////////////
+    //theads
+    float deltaTime = 0.0f;
+
+    // Crear hilos para actualizar los jugadores
+    std::thread player1Thread([&]() {
+        while (window.isOpen()) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Aproximadamente 60 FPS
+            std::unique_lock<std::mutex> lock(mtx);
+            player1.update(deltaTime, SCREEN_HEIGHT, SCREEN_WIDTH);
+        }
+    });
+
+    std::thread player2Thread([&]() {
+        while (window.isOpen()) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Aproximadamente 60 FPS
+            std::unique_lock<std::mutex> lock(mtx);
+            player2.update(deltaTime, SCREEN_HEIGHT, SCREEN_WIDTH);
+        }
+    });
+
+    std::thread enemyThread([&]() {
+        while (window.isOpen()) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Aproximadamente 60 FPS
+            std::unique_lock<std::mutex> lock(mtx);
+            context->executeStrategy(&fireballTexture, deltaTime, SCREEN_HEIGHT, SCREEN_WIDTH);
+        }
+    });
+
+    /////////////////////////////////////////////////////////////////////////////////
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -159,8 +203,19 @@ int main() {
         }
 
         float deltaTime = clock.restart().asSeconds();
+
         std::string winnerName;
         if(gameState == PLAYING){
+            if(gameSubject1.getHealth() == 0){
+                winnerName = (gameSubject1.getItem() > gameSubject2.getItem()) ? player1Name : player2Name; 
+                winText.setString("GAME OVER\n"+player1Name+" murio.\n"+"Pero quien recolecto mas monedas fue " + winnerName);
+                gameState = WIN;
+            }
+            if(gameSubject2.getHealth() == 0){
+                winnerName = (gameSubject1.getItem() > gameSubject2.getItem()) ? player1Name : player2Name; 
+                winText.setString("GAME OVER\n"+player2Name+" murio.\n"+"Pero quien recolecto mas monedas fue " + winnerName);
+                gameState = WIN;
+            }
             player1.handleInput(sf::Keyboard::A, sf::Keyboard::D, sf::Keyboard::W, sf::Keyboard::F, &fireballTexture);
             player2.handleInput(sf::Keyboard::Left, sf::Keyboard::Right, sf::Keyboard::Up, sf::Keyboard::Space, &fireballTexture);
 
@@ -194,15 +249,42 @@ int main() {
 
             // Verificar colisiones de las bolas de fuego
             for (auto& fireball : player1.getFireballs()) {
+                for (auto& fireballE : context->getFireballs()) {
+                    if(fireballE.isColliding(fireball.getBounds())){
+                        fireball.setToBeDestroyed(true);
+                        fireballE.setToBeDestroyed(true);
+                    }
+                }
                 if (fireball.isColliding(player2.getBounds())) {
-                    gameSubject2.addCollision();
+                    gameSubject2.removeHealth();
+                    fireball.setToBeDestroyed(true);
+                }
+                
+            }
+
+            for (auto& fireball : player2.getFireballs()) {
+                for (auto& fireballE : context->getFireballs()) {
+                    if(fireballE.isColliding(fireball.getBounds())){
+                        fireball.setToBeDestroyed(true);
+                        fireballE.setToBeDestroyed(true);
+                    }
+                }
+                if (fireball.isColliding(player1.getBounds())) {
+                    gameSubject1.removeHealth();
+                    fireball.setToBeDestroyed(true);
+                } 
+            }
+
+            for (auto& fireball : context->getFireballs()) {
+                if (fireball.isColliding(player2.getBounds())) {
+                    gameSubject2.removeHealth();
                     fireball.setToBeDestroyed(true);
                 }
             }
 
-            for (auto& fireball : player2.getFireballs()) {
+            for (auto& fireball : context->getFireballs()) {
                 if (fireball.isColliding(player1.getBounds())) {
-                    gameSubject1.addCollision();
+                    gameSubject1.removeHealth();
                     fireball.setToBeDestroyed(true);
                 }
             }
@@ -228,11 +310,11 @@ int main() {
             
 
             std::stringstream ss;
-            ss << player1Name << " Collisions: " << gameSubject1.getCollision() << "\n";
+            ss << player1Name << " Salud: " << gameSubject1.getHealth() << "\n";
             ss << player1Name << " Items: " << gameSubject1.getItem() << "\n";
 
             std::stringstream sss;
-            sss << player2Name << " Collisions: " << gameSubject2.getCollision() << "\n";
+            sss << player2Name << " salud: " << gameSubject2.getHealth() << "\n";
             sss << player2Name << " Items: " << gameSubject2.getItem() << "\n";
 
             text.setString(ss.str());
@@ -272,6 +354,10 @@ int main() {
 
         window.display();
     }
+
+    player1Thread.join();
+    player2Thread.join();
+    enemyThread.join();
 
     return 0;
 }

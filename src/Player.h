@@ -3,16 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "Observer.h"
 #include "Fireball.h"
 #include "Platform.hpp"
 
-
-class Observer {
-public:
-    virtual ~Observer() {}
-    virtual void itemCounter(int item) = 0;
-    virtual void collisionCounter(int collision) = 0;
-};
 
 class Player: public Observer{
 private:
@@ -32,6 +26,7 @@ private:
     int playerNumber;
     int collisionCount;
     int itemCount;
+    int healthCount;
     sf::Text playerNameText;
 
 public:
@@ -44,6 +39,7 @@ public:
 //////////////////////////OBSERVER////////////////////////////////////////////////////////////
     void collisionCounter(int collision) override;
     void itemCounter(int item) override;
+    void healthCounter(int health) override;
 //////////////////////////////////////////////////////////////////////////////////////
 
     void resolveCollision(Player& other);

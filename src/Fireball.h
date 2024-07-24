@@ -21,6 +21,7 @@ public:
     int getOwnerPlayerNum() const;
     bool getToBeDestroyed() const;
     void setToBeDestroyed(bool val);
+    sf::FloatRect getBounds() const;
 };
 
 #endif // FIREBALL_H

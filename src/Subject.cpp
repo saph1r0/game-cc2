@@ -12,6 +12,12 @@
         for (Observer* observer : observers) {
             observer->itemCounter(item);
             observer->collisionCounter(collision);
+            observer->healthCounter(health);
+        }
+    }
+    void Subject::notifyObservers2() {
+        for (Observer* observer : observers) {
+            observer->collisionCounter(collision);
         }
     }
 
@@ -24,6 +30,11 @@
         collision = b;
         notifyObservers();
     }
+    void Subject::setHealth(int c) {
+        health = c;
+        notifyObservers();
+    }
+
 
     void Subject::addItem() {
         item++;
@@ -35,10 +46,19 @@
         notifyObservers();
     }
 
+    void Subject::removeHealth() {
+        health--;
+        notifyObservers();
+    }
+
     int Subject::getItem() const {
         return item;
     }
 
     int Subject::getCollision() const {
         return collision;
+    }
+
+    int Subject::getHealth() const {
+        return health;
     }

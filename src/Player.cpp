@@ -146,6 +146,9 @@ const float MOVE_SPEED = 200.0f;
     void Player::itemCounter(int item){
         itemCount = item;
     }
+    void Player::healthCounter(int health){
+        healthCount = health;
+    }
 //////////////////////////////////////////////////////////////////////////////////////
 
     void Player::resolvePlatformCollision(const Platform& platform) {
