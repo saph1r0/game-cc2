@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named juego
+# Target rules for targets named 1
 
 # Build rule for target.
-juego: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 juego
-.PHONY : juego
+1 : cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 1
+.PHONY : 1
 
 # fast build rule for target.
-juego/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/build
-.PHONY : juego/fast
+1/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/build
+.PHONY : 1/fast
 
 src/Fireball.o: src/Fireball.cpp.o
 .PHONY : src/Fireball.o
 
 # target to build an object file
 src/Fireball.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/Fireball.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Fireball.cpp.o
 .PHONY : src/Fireball.cpp.o
 
 src/Fireball.i: src/Fireball.cpp.i
@@ -142,7 +142,7 @@ src/Fireball.i: src/Fireball.cpp.i
 
 # target to preprocess a source file
 src/Fireball.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/Fireball.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Fireball.cpp.i
 .PHONY : src/Fireball.cpp.i
 
 src/Fireball.s: src/Fireball.cpp.s
@@ -150,15 +150,63 @@ src/Fireball.s: src/Fireball.cpp.s
 
 # target to generate assembly for a file
 src/Fireball.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/Fireball.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Fireball.cpp.s
 .PHONY : src/Fireball.cpp.s
+
+src/Item.o: src/Item.cpp.o
+.PHONY : src/Item.o
+
+# target to build an object file
+src/Item.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Item.cpp.o
+.PHONY : src/Item.cpp.o
+
+src/Item.i: src/Item.cpp.i
+.PHONY : src/Item.i
+
+# target to preprocess a source file
+src/Item.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Item.cpp.i
+.PHONY : src/Item.cpp.i
+
+src/Item.s: src/Item.cpp.s
+.PHONY : src/Item.s
+
+# target to generate assembly for a file
+src/Item.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Item.cpp.s
+.PHONY : src/Item.cpp.s
+
+src/ItemFactory.o: src/ItemFactory.cpp.o
+.PHONY : src/ItemFactory.o
+
+# target to build an object file
+src/ItemFactory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/ItemFactory.cpp.o
+.PHONY : src/ItemFactory.cpp.o
+
+src/ItemFactory.i: src/ItemFactory.cpp.i
+.PHONY : src/ItemFactory.i
+
+# target to preprocess a source file
+src/ItemFactory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/ItemFactory.cpp.i
+.PHONY : src/ItemFactory.cpp.i
+
+src/ItemFactory.s: src/ItemFactory.cpp.s
+.PHONY : src/ItemFactory.s
+
+# target to generate assembly for a file
+src/ItemFactory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/ItemFactory.cpp.s
+.PHONY : src/ItemFactory.cpp.s
 
 src/Platform.o: src/Platform.cpp.o
 .PHONY : src/Platform.o
 
 # target to build an object file
 src/Platform.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/Platform.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Platform.cpp.o
 .PHONY : src/Platform.cpp.o
 
 src/Platform.i: src/Platform.cpp.i
@@ -166,7 +214,7 @@ src/Platform.i: src/Platform.cpp.i
 
 # target to preprocess a source file
 src/Platform.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/Platform.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Platform.cpp.i
 .PHONY : src/Platform.cpp.i
 
 src/Platform.s: src/Platform.cpp.s
@@ -174,7 +222,7 @@ src/Platform.s: src/Platform.cpp.s
 
 # target to generate assembly for a file
 src/Platform.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/Platform.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Platform.cpp.s
 .PHONY : src/Platform.cpp.s
 
 src/Player.o: src/Player.cpp.o
@@ -182,7 +230,7 @@ src/Player.o: src/Player.cpp.o
 
 # target to build an object file
 src/Player.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/Player.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Player.cpp.o
 .PHONY : src/Player.cpp.o
 
 src/Player.i: src/Player.cpp.i
@@ -190,7 +238,7 @@ src/Player.i: src/Player.cpp.i
 
 # target to preprocess a source file
 src/Player.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/Player.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Player.cpp.i
 .PHONY : src/Player.cpp.i
 
 src/Player.s: src/Player.cpp.s
@@ -198,15 +246,39 @@ src/Player.s: src/Player.cpp.s
 
 # target to generate assembly for a file
 src/Player.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/Player.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Player.cpp.s
 .PHONY : src/Player.cpp.s
+
+src/Subject.o: src/Subject.cpp.o
+.PHONY : src/Subject.o
+
+# target to build an object file
+src/Subject.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Subject.cpp.o
+.PHONY : src/Subject.cpp.o
+
+src/Subject.i: src/Subject.cpp.i
+.PHONY : src/Subject.i
+
+# target to preprocess a source file
+src/Subject.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Subject.cpp.i
+.PHONY : src/Subject.cpp.i
+
+src/Subject.s: src/Subject.cpp.s
+.PHONY : src/Subject.s
+
+# target to generate assembly for a file
+src/Subject.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/Subject.cpp.s
+.PHONY : src/Subject.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -214,7 +286,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -222,7 +294,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -233,16 +305,25 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... juego"
+	@echo "... 1"
 	@echo "... src/Fireball.o"
 	@echo "... src/Fireball.i"
 	@echo "... src/Fireball.s"
+	@echo "... src/Item.o"
+	@echo "... src/Item.i"
+	@echo "... src/Item.s"
+	@echo "... src/ItemFactory.o"
+	@echo "... src/ItemFactory.i"
+	@echo "... src/ItemFactory.s"
 	@echo "... src/Platform.o"
 	@echo "... src/Platform.i"
 	@echo "... src/Platform.s"
 	@echo "... src/Player.o"
 	@echo "... src/Player.i"
 	@echo "... src/Player.s"
+	@echo "... src/Subject.o"
+	@echo "... src/Subject.i"
+	@echo "... src/Subject.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

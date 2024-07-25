@@ -25,12 +25,12 @@ public:
             decoratedPlatform->draw(window);
         }
     }
-
+// Get the bounds of the decorated platform, if it exists
     virtual sf::FloatRect getBounds() const override {
         if (decoratedPlatform) {
             return decoratedPlatform->getBounds();
         }
-        return sf::FloatRect();
+        return sf::FloatRect();// Return empty bounds if no decorated platform
     }
 };
 

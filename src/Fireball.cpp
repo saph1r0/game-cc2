@@ -3,14 +3,14 @@
 #include<SFML/Graphics.hpp>
 
     Fireball::Fireball(sf::Texture* tex, sf::IntRect texPos, int own, sf::Vector2f pos, sf::Vector2f dir, int startPow) {
-        ownerPlayerNum = own;
-        power = startPow;
-        toBeDestroyed = false;
-        sprite.setTexture(*tex);
-        direction = dir;
-        sprite.setPosition(pos);
-        sprite.setTextureRect(texPos);
-        sprite.setScale(0.75f, 0.75f);
+        ownerPlayerNum = own; //player num?
+        power = startPow; 
+        toBeDestroyed = false; 
+        sprite.setTexture(*tex); 
+        direction = dir; 
+        sprite.setPosition(pos); 
+        sprite.setTextureRect(texPos); // Set texture rectangle
+        sprite.setScale(0.75f, 0.75f); // Scale sprite
         if (ownerPlayerNum == 1) { //jugador
             sprite.setColor(sf::Color::Blue);
         }else if(ownerPlayerNum ==3){
@@ -22,7 +22,7 @@
         sprite.move(direction); //mover n direccion
         frameCount++;
         if (frameCount >= 10) {
-            power--;
+            power--;// Decrease power over time
             frameCount = 0;
         }
         if (power <= 0) {
@@ -30,7 +30,7 @@
         }
         sf::Vector2f pos = sprite.getPosition();
         if (pos.x < 0 || pos.y < 0 || pos.x > SCREEN_WIDTH || pos.y > SCREEN_HEIGHT) {
-            toBeDestroyed = true;
+            toBeDestroyed = true;// Mark for destruction if out of bounds or power is depleted
         }
     }
     bool Fireball::isColliding(const sf::FloatRect& other) {

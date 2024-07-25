@@ -17,25 +17,29 @@
 
 
 void handleCollisions(Player& player1, Player& player2, const std::vector<Platform*>& platforms);
-
+// Function to handle collisions between players and platforms.
 enum GameState {
     INTRO,
     MENU,
     PLAYING,
     WIN
-};
+};/*Enum to track the state of the game. It can be in
+ the introduction screen, menu, playing state, or win state*/
 
 
 int main() {
-    std::mutex mtx; // Mutex para sincronización de acceso a datos compartidos
+    std::mutex mtx; /*object used to synchronize access to shared data between threads, ensuring 
+     that only one thread can access the shared resource at a time.*/
     std::string player1Name, player2Name;
 
+    //Reads player names from the console input.
     std::cout << "Nombre de Jugador 1: ";
     std::getline(std::cin, player1Name); 
 
     std::cout << "Nombre de Jugador 2: ";
     std::getline(std::cin, player2Name);
 
+    /*Retrieves the current desktop screen resolution.*/
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     int SCREEN_WIDTH = desktop.width - 95;
     int SCREEN_HEIGHT = desktop.height - 95;
@@ -47,31 +51,32 @@ int main() {
     std::cout<<"w: "<<SCREEN_WIDTH<<std::endl;
 
     Level level(mapOffsetX, mapOffsetY, SCREEN_WIDTH, SCREEN_HEIGHT); ////////////////OBJECTO LEVEL
-
+    // Creates a window for rendering the game.
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Game");
 
+    //Loads textures for items and fireballs.
     sf::Texture itemTexture;
-    if (!itemTexture.loadFromFile("/home/diogo/Descargas/juego_finall_final/images/spritesheet.png")) {
+    if (!itemTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/spritesheet.png")) {
         return -1;
     }
 
     sf::Font font;
-    if (!font.loadFromFile("/home/diogo/Descargas/juego_finall_final/images/Retro Gaming.ttf")) {
+    if (!font.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/Retro Gaming.ttf")) {
         return -1;
     }
 
     sf::Texture fireballTexture;
-    if (!fireballTexture.loadFromFile("/home/diogo/Descargas/juego_finall_final/images/Fireball Spritesheet.png")) {
+    if (!fireballTexture.loadFromFile("images/Fireball Spritesheet.png")) {
         return -1;
     }
 
     sf::Texture introBackgroundTexture;
-    if (!introBackgroundTexture.loadFromFile("/home/diogo/Descargas/juego_finall_final/images/fondos/intro.jpg")) {
+    if (!introBackgroundTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/fondos/intro.jpg")) {
         return -1; // Manejo de error si no se puede cargar la textura
     }
 
     sf::Texture menuBackgroundTexture;
-    if (!menuBackgroundTexture.loadFromFile("/home/diogo/Descargas/juego_finall_final/images/fondos/menu.jpg")) {
+    if (!menuBackgroundTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/fondos/menu.jpg")) {
         return -1; // Manejo de error si no se puede cargar la textura
     }
 
@@ -85,6 +90,7 @@ int main() {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   // Sets up text elements for intro, win, and menu screens. Positions them in the center of the screen.
     sf::Text introText("Press Enter to Play", font, 50);
     introText.setFillColor(sf::Color::White);
     introText.setPosition((SCREEN_WIDTH - introText.getLocalBounds().width) / 2, (SCREEN_HEIGHT - introText.getLocalBounds().height) / 2);
@@ -100,27 +106,29 @@ int main() {
     GameState gameState = INTRO;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     std::vector<Player> players;
-    
-    Player player1("/home/diogo/Descargas/juego_finall_final/images/AnimationSheetderecha.png", "/home/diogo/Descargas/juego_finall_final/images/AnimationSheetizq.png", sf::Vector2f(100.0f, 0.0f), 1 ,player1Name, font);
-    Player player2("/home/diogo/Descargas/juego_finall_final/images/AnimationSheetderecha.png", "/home/diogo/Descargas/juego_finall_final/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2 ,player2Name, font);
+    //Creates two player objects with initial positions and textures.
+    Player player1("/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetderecha.png", "/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetizq.png", sf::Vector2f(100.0f, 0.0f), 1 ,player1Name, font);
+    Player player2("/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetderecha.png", "/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2 ,player2Name, font);
     players.push_back(player1);
     players.push_back(player2);
 
-    Context* context = new Context(new fireballCostados());
+    Context* context = new Context(new fireballCostados());//Manages the strategy pattern for fireball attacks.
 
-    const int itemWidth = 64;  // ancho
-    const int itemHeight = 64; // altura
-    const int numItems = 8;   // número de ítems
+    const int itemWidth = 64;  
+    const int itemHeight = 64;
+    const int numItems = 8;   
     const float itemScale = 0.5f;
 
     std::vector<Item> items;
     //createItems(itemTexture, items, itemWidth, itemHeight, numItems, window.getSize(), platforms, itemScale);
     ItemFactory::createItems(itemTexture, items, itemWidth, itemHeight, numItems, level.getPlatforms(), itemScale);
-
+    //Uses the ItemFactory to create and configure items in the game world.
 
     sf::Clock clock;
 
     ////////////////////////////////OBSERVER///////////////////////////////////////////////////
+    /*Manages observers that are notified of changes. In this case, gameSubject1 and gameSubject2 will 
+    notify player1 and player2 respectively.*/
         Subject gameSubject1;
         Subject gameSubject2;
         //Subject enemyAtack;
@@ -155,11 +163,11 @@ int main() {
     //theads
     float deltaTime = 0.0f;
 
-    // Crear hilos para actualizar los jugadores
+    // Creates separate threads for updating each player to allow concurrent updates.
     std::thread player1Thread([&]() {
         while (window.isOpen()) {
             std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Aproximadamente 60 FPS
-            std::unique_lock<std::mutex> lock(mtx);
+            std::unique_lock<std::mutex> lock(mtx);//Locks the mutex to ensure safe access to shared data when updating the player.
             player1.update(deltaTime, SCREEN_HEIGHT, SCREEN_WIDTH);
         }
     });
@@ -189,15 +197,15 @@ int main() {
                 window.close();
             }
             if (gameState == INTRO && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
-                gameState = MENU;
+                gameState = MENU;//transition to the menu state.
             }
 
             if (gameState == MENU && event.type == sf::Event::KeyPressed) {
                 if (event.key.code >= sf::Keyboard::Num1 && event.key.code <= sf::Keyboard::Num9) {
-                        int levelIndex = event.key.code - sf::Keyboard::Num1;
+                        int levelIndex = event.key.code - sf::Keyboard::Num1;// the level index
                         std::cout<<levelIndex<<std::endl;
-                        if (levelIndex >= 0 && levelIndex < 10) {
-                            level.loadLevel(mapOffsetX, mapOffsetY, levelIndex);
+                        if (levelIndex >= 0 && levelIndex < 10) {// levelIndex is in valid range
+                            level.loadLevel(mapOffsetX, mapOffsetY, levelIndex);//loading
                             gameState = PLAYING;
                         }
                 }
@@ -206,7 +214,7 @@ int main() {
             if (gameState == MENU) {
                 window.draw(menuBackground);
 
-                // Crear y dibujar botones para cada nivel
+                // Create and draw buttons for each level
                 std::vector<Button> levelButtons;
                 float buttonWidth = 200;
                 float buttonHeight = 50;
@@ -216,19 +224,19 @@ int main() {
                 // Crear botones para los niveles del 1 al 9
                 for (int i = 0; i < 9; ++i) {
                     std::string buttonText = "Level " + std::to_string(i + 1);
-                    Button button(buttonPosition, sf::Vector2f(buttonWidth, buttonHeight), buttonText, font);
-                    levelButtons.push_back(button);
+                    Button button(buttonPosition, sf::Vector2f(buttonWidth, buttonHeight), buttonText, font);//create
+                    levelButtons.push_back(button);//add
 
-                    // Ajustar posición para el siguiente botón
+                    //update pos for next button
                     buttonPosition.y += buttonHeight + buttonSpacing;
                 }
 
-                // Dibujar y detectar clics en botones
+                // draw detect clik
                 for (auto& button : levelButtons) {
                     button.draw(window);
                 }
 
-                // Detectar clics para seleccionar nivel
+                // Detect clicks to select a level
                 if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
                     sf::Vector2f clickPosition(event.mouseButton.x, event.mouseButton.y);
                     for (int i = 0; i < levelButtons.size(); ++i) {
@@ -246,11 +254,11 @@ int main() {
 
         }
 
-        float deltaTime = clock.restart().asSeconds();
+        float deltaTime = clock.restart().asSeconds();//Calculate time elapsed since the last frame
 
         std::string winnerName;
         if(gameState == PLAYING){
-            if(gameSubject1.getHealth() == 0){
+            if(gameSubject1.getHealth() == 0){// Determine the winner if gameSubject1 is dead
                 winnerName = (gameSubject1.getItem() > gameSubject2.getItem()) ? player1Name : player2Name; 
                 winText.setString("GAME OVER\n"+player1Name+" murio.\n"+"Pero quien recolecto mas monedas fue " + winnerName);
                 gameState = WIN;
@@ -269,20 +277,20 @@ int main() {
             context->executeStrategy(&fireballTexture, deltaTime, SCREEN_HEIGHT, SCREEN_WIDTH);
 
             
-
+            // Check level transitions
             if (level.checkLevelTransition(player1.getBounds()) || level.checkLevelTransition(player2.getBounds())) {
-                int temporal = level.getLevel();
+                int temporal = level.getLevel(); // Get current level
                 items.clear();
                 players.clear();
-                if(temporal == 9){
+                if(temporal == 9){// Handle end of final level
                     winnerName = (gameSubject1.getItem() > gameSubject2.getItem()) ? player1Name : player2Name; 
                     winText.setString("El ganador es: " + winnerName);
                     gameState =WIN;
-                }else{
-                    level.loadLevel(mapOffsetX, mapOffsetY,temporal); ///here
+                }else{//....next lv
+                    level.loadLevel(mapOffsetX, mapOffsetY,temporal); 
                     ItemFactory::createItems(itemTexture, items, itemWidth, itemHeight, numItems, level.getPlatforms(), itemScale);
-                    Player player1("/home/diogo/Descargas/juego_finall_final/images/AnimationSheetderecha.png", "/home/diogo/Descargas/juego_finall_final/images/AnimationSheetizq.png", sf::Vector2f(100.0f, 0.0f), 1 ,player1Name, font);
-                    Player player2("/home/diogo/Descargas/juego_finall_final/images/AnimationSheetderecha.png", "/home/diogo/Descargas/juego_finall_final/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2 ,player2Name, font);
+                    Player player1("/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetderecha.png", "/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetizq.png",sf::Vector2f(100.0f, 0.0f), 1 ,player1Name, font);
+                    Player player2("/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetderecha.png", "/home/ubuntu20/c++/gaamee-cc2/images/AnimationSheetizq.png", sf::Vector2f(600.0f, 400.0f), 2 ,player2Name, font);
 
                 }
             }
@@ -291,7 +299,7 @@ int main() {
 
             handleCollisions(player1, player2, level.getPlatforms());
 
-            // Verificar colisiones de las bolas de fuego
+            //Check fireball collisions
             for (auto& fireball : player1.getFireballs()) {
                 for (auto& fireballE : context->getFireballs()) {
                     if(fireballE.isColliding(fireball.getBounds())){
@@ -335,7 +343,7 @@ int main() {
 
             for (auto it = items.begin(); it != items.end();) {
                 if (player1.isColliding(it->getBounds())) {
-                    gameSubject1.addItem();
+                    gameSubject1.addItem();// Add item to player1
                     it = items.erase(it);
                 } else {
                     ++it;
@@ -352,7 +360,7 @@ int main() {
             }
 
             
-
+            // Update HUD text
             std::stringstream ss;
             ss << player1Name << " Salud: " << gameSubject1.getHealth() << "\n";
             ss << player1Name << " Items: " << gameSubject1.getItem() << "\n";
@@ -374,7 +382,7 @@ int main() {
 
         window.clear(sf::Color::Black);
 
-        if (gameState == INTRO) {
+        if (gameState == INTRO) {//drawing..
                     window.draw(introBackground);
             window.draw(introText);
         } else if (gameState == MENU) {
@@ -402,6 +410,7 @@ int main() {
         window.display();
     }
 
+    // Wait threads to complete
     player1Thread.join();
     player2Thread.join();
     enemyThread.join();

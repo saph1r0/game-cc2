@@ -13,7 +13,7 @@ public:
         rect.setSize(size);
         rect.setPosition(position);
         rect.setFillColor(sf::Color::Blue);
-
+        //// Set text properties
         textString.setFillColor(sf::Color::White);
         textString.setPosition(position.x + 10, position.y + 10);
     }
@@ -22,7 +22,8 @@ public:
         window.draw(rect);
         window.draw(textString);
     }
-
+    /*method checks if a given click position is within the bounds of the button. This is 
+    done by comparing the click position with the global bounds of the rectangle.*/
     bool isClicked(sf::Vector2f clickPosition) {
         return rect.getGlobalBounds().contains(clickPosition);
     }

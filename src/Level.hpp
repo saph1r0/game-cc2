@@ -8,7 +8,7 @@
 #include "Platform.hpp"
 #include "MountainPlatform.hpp"
 #include "LevelPlatform.hpp"
-// #include "BushPlatform.hpp" // Descomentar si se usa BushPlatform
+
 
 class Level {
 private:
@@ -36,7 +36,7 @@ public:
             sf::Texture backgroundTexture;
 
             if (i == 0) {
-                std::string backgroundPath = "/home/diogo/Descargas/juego_finall_final/images/fondos/nivel" + std::to_string(i) + ".jpg";
+                std::string backgroundPath = "/home/ubuntu20/c++/gaamee-cc2/images/fondos/nivel" + std::to_string(i) + ".jpg";
                 if (!backgroundTexture.loadFromFile(backgroundPath)) {
                     std::cerr << "Error: Failed to load background texture for level " << i << std::endl;
                     exit(EXIT_FAILURE);
@@ -61,7 +61,7 @@ public:
                 );
             }
             else if (i == 1) {
-                std::string backgroundPath = "/home/diogo/Descargas/juego_finall_final/images/fondos/nivel" + std::to_string(i) + ".jpg";
+                std::string backgroundPath = "/home/ubuntu20/c++/gaamee-cc2/images/fondos/nivel" + std::to_string(i) + ".jpg";
                 if (!backgroundTexture.loadFromFile(backgroundPath)) {
                     std::cerr << "Error: Failed to load background texture for level " << i << std::endl;
                     exit(EXIT_FAILURE);
@@ -86,7 +86,7 @@ public:
                 );
             }
             else if (i == 2) {
-                std::string backgroundPath = "/home/diogo/Descargas/juego_finall_final/images/fondos/nivel" + std::to_string(i) + ".jpg";
+                std::string backgroundPath = "/home/ubuntu20/c++/gaamee-cc2/images/fondos/nivel" + std::to_string(i) + ".jpg";
                 if (!backgroundTexture.loadFromFile(backgroundPath)) {
                     std::cerr << "Error: Failed to load background texture for level " << i << std::endl;
                     exit(EXIT_FAILURE);
@@ -111,7 +111,7 @@ public:
                 );
             }
             else if (i == 3) {
-                std::string backgroundPath = "/home/diogo/Descargas/juego_finall_final/images/fondos/nivel" + std::to_string(i) + ".jpg";
+                std::string backgroundPath = "/home/ubuntu20/c++/gaamee-cc2/images/fondos/nivel" + std::to_string(i) + ".jpg";
                 if (!backgroundTexture.loadFromFile(backgroundPath)) {
                     std::cerr << "Error: Failed to load background texture for level " << i << std::endl;
                     exit(EXIT_FAILURE);
@@ -136,7 +136,7 @@ public:
                 );
             }
             else if (i == 4) {
-                std::string backgroundPath = "/home/diogo/Descargas/juego_finall_final/images/fondos/nivel" + std::to_string(i) + ".jpg";
+                std::string backgroundPath = "/home/ubuntu20/c++/gaamee-cc2/images/fondos/nivel" + std::to_string(i) + ".jpg";
                 if (!backgroundTexture.loadFromFile(backgroundPath)) {
                     std::cerr << "Error: Failed to load background texture for level " << i << std::endl;
                     exit(EXIT_FAILURE);
@@ -161,7 +161,7 @@ public:
                 );
             }
             else if (i == 5) {
-                std::string backgroundPath = "/home/diogo/Descargas/juego_finall_final/images/fondos/nivel" + std::to_string(i) + ".jpg";
+                std::string backgroundPath = "/home/ubuntu20/c++/gaamee-cc2/images/fondos/nivel" + std::to_string(i) + ".jpg";
                 if (!backgroundTexture.loadFromFile(backgroundPath)) {
                     std::cerr << "Error: Failed to load background texture for level " << i << std::endl;
                     exit(EXIT_FAILURE);
@@ -186,7 +186,7 @@ public:
                 );
             }
             else if (i == 6) {
-                std::string backgroundPath = "/home/diogo/Descargas/juego_finall_final/images/fondos/nivel" + std::to_string(i) + ".jpg";
+                std::string backgroundPath = "/home/ubuntu20/c++/gaamee-cc2/images/fondos/nivel" + std::to_string(i) + ".jpg";
                 if (!backgroundTexture.loadFromFile(backgroundPath)) {
                     std::cerr << "Error: Failed to load background texture for level " << i << std::endl;
                     exit(EXIT_FAILURE);
@@ -211,7 +211,7 @@ public:
                 );
             }
             else if (i == 7) {
-                std::string backgroundPath = "/home/diogo/Descargas/juego_finall_final/images/fondos/nivel" + std::to_string(i) + ".jpg";
+                std::string backgroundPath = "/home/ubuntu20/c++/gaamee-cc2/images/fondos/nivel" + std::to_string(i) + ".jpg";
                 if (!backgroundTexture.loadFromFile(backgroundPath)) {
                     std::cerr << "Error: Failed to load background texture for level " << i << std::endl;
                     exit(EXIT_FAILURE);
@@ -236,7 +236,7 @@ public:
                 );
             }
             else if (i == 8) {
-                std::string backgroundPath = "/home/diogo/Descargas/juego_finall_final/images/fondos/nivel" + std::to_string(i) + ".jpg";
+                std::string backgroundPath = "/home/ubuntu20/c++/gaamee-cc2/images/fondos/nivel" + std::to_string(i) + ".jpg";
                 if (!backgroundTexture.loadFromFile(backgroundPath)) {
                     std::cerr << "Error: Failed to load background texture for level " << i << std::endl;
                     exit(EXIT_FAILURE);
@@ -263,7 +263,7 @@ public:
             
         }
 
-        if (!transitionTexture.loadFromFile("/home/diogo/Descargas/juego_finall_final/images/cargando.png")) {
+        if (!transitionTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/cargando.png")) {
             std::cerr << "Error: Failed to load transition texture!" << std::endl;
             exit(EXIT_FAILURE);
         }
@@ -279,7 +279,7 @@ public:
             delete platform;
         }
     }
-
+    // Load level data and create platforms
     void loadLevel(int mapOffsetX, int mapOffsetY, int levelIndex = 0) {
         platforms.clear();
         currentLevelIndex = levelIndex;
@@ -327,8 +327,7 @@ public:
         // Dibujar el fondo del nivel actual
         sf::Sprite backgroundSprite(getCurrentBackgroundTexture());
         window.draw(backgroundSprite);
-
-        // Dibujar las plataformas
+        
         for (auto& platform : platforms) {
             platform->draw(window);
         }

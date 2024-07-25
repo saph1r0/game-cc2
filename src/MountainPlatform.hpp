@@ -14,7 +14,7 @@ public:
     MountainPlatform(sf::Vector2f size, sf::Vector2f position, Platform* platform = nullptr)
         : PlatformDecorator(size, position, platform ? platform : new DefaultPlatform(size, position)) { // Usar una plataforma predeterminada si platform es nullptr
 
-        if (!mountainTexture.loadFromFile("/home/diogo/Descargas/juego_finall_final/images/k.png")) {
+        if (!mountainTexture.loadFromFile("/home/ubuntu20/c++/gaamee-cc2/images/k.png")) {
             std::cerr << "Error: Failed to load mountain texture!" << std::endl;
             exit(EXIT_FAILURE);
         }

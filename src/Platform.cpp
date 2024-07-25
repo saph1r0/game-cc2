@@ -2,7 +2,7 @@
 
 Platform::Platform(sf::Vector2f size, sf::Vector2f position)
     : size(size), position(position) {
-    // Inicializar el shape con el tamaño y la posición
+    // Inicializar la forma onc tam y pos
     shape.setSize(size);
     shape.setPosition(position);
     shape.setFillColor(sf::Color::Red);
