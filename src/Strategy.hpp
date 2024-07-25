@@ -8,12 +8,13 @@
 #include <iostream>
 #include <vector>
 
+//strategy holds the virtual functions to give us access to whatever class of fireball we choose
 class Strategy {
 public:
     virtual void shoot(sf::Texture* fireballTexture, sf::Sprite& shape, std::vector<Fireball>& fireballs) = 0;
     virtual void update(float deltaTime, int SCREEN_HEIGHT, int SCREEN_WIDTH, std::vector<Fireball>& fireballs) = 0;
 };
-
+//attack that starts in the enemy position
 class fireballNormal : public Strategy {
     private:
     int ritmo;
@@ -59,11 +60,10 @@ public:
         fireballs.erase(std::remove_if(fireballs.begin(), fireballs.end(), [](const Fireball& fb) { return fb.getToBeDestroyed(); }), fireballs.end());
     }
 
-    //void isColliding(Player &player){}
 };
 
 
-//aqui irian copias de fireballNormal pero con mayor velocidad 
+//fireballs that start in the borders of the window
 
 class fireballCostados : public Strategy {
     private:
@@ -74,7 +74,7 @@ public:
         if(ritmo==500){
             ritmo = 0;
             sf::Vector2f pos = sf::Vector2f(0,150);
-            sf::Vector2f pos2 = sf::Vector2f(1271,300); //aqui tecnicamente deberia de ir el tamañao de la pantalla
+            sf::Vector2f pos2 = sf::Vector2f(1271,300); //window resolutions
             sf::Vector2f pos3 = sf::Vector2f(0,480);
 
             sf::Vector2f direction = sf::Vector2f(1.0f, 0.0f);
@@ -117,6 +117,7 @@ public:
 
 };
 
+//the class context is building the enemy
 class Context{ //: public Observer
 private:
     sf::Sprite shape;
@@ -128,24 +129,25 @@ private:
     sf::Texture textura;
     int collisionCount;
 public:
+//context set everything to watch the enemy
     Context(Strategy* strategy) : strategy(strategy) {
-        textura.loadFromFile("/home/diogo/Descargas/juego_finall_final/images/enemy1.png");
+        textura.loadFromFile("/directorio/game-cc2-juego_actual/images/enemy1.png");
         shape.setTexture(textura);
         shape.setPosition(SCREEN_WIDTH/2, SCREEN_HEIGHT-100);
         shape.setScale(4.0f , 4.0f);
     }
-
+//draw enemy + fireballs
     void draw(sf::RenderWindow& window) {
         window.draw(shape);
         for (auto& fireball : fireballs) {
             window.draw(fireball.getSprite());
         }
     }
-
+//the strategy is the form how the fireballs will look. we can set it insteid of putting it in the constructor
     void setStrategy(Strategy* strategy) {
         this->strategy = strategy;
     }
-
+//for collaing the override funcions
     void executeStrategy(sf::Texture* fireballTexture, float deltaTime, int SCREEN_HEIGHT, int SCREEN_WIDTH) {
         strategy->shoot(fireballTexture, shape, fireballs);
         strategy->update(deltaTime, SCREEN_HEIGHT, SCREEN_WIDTH, fireballs);
@@ -157,6 +159,7 @@ public:
     }
 //////////////////////////////////////////////////////////////////////////////////////
 */
+//to get the fireballs
     std::vector<Fireball>& getFireballs(){
         return fireballs;
     }
