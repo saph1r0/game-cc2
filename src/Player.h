@@ -3,10 +3,12 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "Observer.h"
 #include "Fireball.h"
-#include "Platform.h"
+#include "Platform.hpp"
 
-class Player {
+
+class Player: public Observer{
 private:
     sf::Sprite sprite;
     sf::Texture textureRight;
@@ -23,21 +25,31 @@ private:
     int ammo;
     int playerNumber;
     int collisionCount;
+    int itemCount;
+    int healthCount;
+    sf::Text playerNameText;
 
 public:
-    Player(const std::string& textureFileRight, const std::string& textureFileLeft, sf::Vector2f position, int number);
-    void update(float deltaTime);
+    Player(const std::string& textureFileRight, const std::string& textureFileLeft, sf::Vector2f position, int number, const std::string& playerName, const sf::Font& font);
+    void update(float deltaTime, int SCREEN_HEIGHT, int SCREEN_WIDTH);
     void draw(sf::RenderWindow& window);
     sf::FloatRect getBounds() const;
+    void updateNamePosition();
+
+//////////////////////////OBSERVER////////////////////////////////////////////////////////////
+    void collisionCounter(int collision) override;
+    void itemCounter(int item) override;
+    void healthCounter(int health) override;
+//////////////////////////////////////////////////////////////////////////////////////
+
     void resolveCollision(Player& other);
     void resolvePlatformCollision(const Platform& platform);
+    
     void shoot(sf::Texture* fireballTexture, sf::Vector2f direction);
     void handleInput(sf::Keyboard::Key leftKey, sf::Keyboard::Key rightKey, sf::Keyboard::Key jumpKey, sf::Keyboard::Key attackKey, sf::Texture* fireballTexture);
     bool isColliding(const sf::FloatRect& other);
     std::vector<Fireball>& getFireballs();
-    void increaseCollisionCount();
-    int getCollisionCount() const;
-    sf::Vector2f getVelocity() const;
+
 };
 
 #endif // PLAYER_H

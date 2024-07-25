@@ -1,0 +1,50 @@
+class Subject {
+private:
+    std::vector<Observer*> observers;
+    int item;
+    int collision;
+
+public:
+    void addObserver(Observer* observer) {
+        observers.push_back(observer);
+    }
+
+    void removeObserver(Observer* observer) {
+        observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
+    }
+
+    void notifyObservers() {
+        for (Observer* observer : observers) {
+            observer->itemCounter(item);
+            observer->collisionCounter(collision);
+        }
+    }
+
+    void setItem(int a) {
+        item = a;
+        notifyObservers();
+    }
+
+    void setCollision(int b) {
+        collision = b;
+        notifyObservers();
+    }
+
+    void addItem() {
+        item++;
+        notifyObservers();
+    }
+
+    void addCollision() {
+        collision++;
+        notifyObservers();
+    }
+
+    int getItem() const {
+        return item;
+    }
+
+    int getCollision() const {
+        return collision;
+    }
+};

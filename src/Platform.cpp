@@ -1,15 +1,18 @@
-#include "Platform.h"
+#include "Platform.hpp"
 
-#include <SFML/Graphics.hpp>
+Platform::Platform(sf::Vector2f size, sf::Vector2f position)
+    : size(size), position(position) {
+    // Inicializar el shape con el tamaño y la posición
+    shape.setSize(size);
+    shape.setPosition(position);
+    shape.setFillColor(sf::Color::Red);
+}
 
-    Platform::Platform(sf::Vector2f size, sf::Vector2f position) { //constructor (tamaño, poicion)
-        shape.setSize(size);
-        shape.setPosition(position);
-        shape.setFillColor(sf::Color::Red);
-    }
-    void Platform::draw(sf::RenderWindow& window) {
-        window.draw(shape);
-    }
-    sf::FloatRect Platform::getBounds() const {
-        return shape.getGlobalBounds(); //medidas del rectangulo
-    }
+void Platform::draw(sf::RenderWindow& window) {
+    window.draw(shape);
+}
+
+sf::FloatRect Platform::getBounds() const {
+    return shape.getGlobalBounds();
+}
+

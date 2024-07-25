@@ -13,10 +13,12 @@
         sprite.setScale(0.75f, 0.75f);
         if (ownerPlayerNum == 1) { //jugador
             sprite.setColor(sf::Color::Blue);
+        }else if(ownerPlayerNum ==3){
+            sprite.setColor(sf::Color::Green);
         }
         frameCount = 0;
     }
-    void Fireball::update(float deltaTime) {
+    void Fireball::update(float deltaTime, int SCREEN_HEIGHT, int SCREEN_WIDTH) {
         sprite.move(direction); //mover n direccion
         frameCount++;
         if (frameCount >= 10) {
@@ -27,7 +29,7 @@
             toBeDestroyed = true;
         }
         sf::Vector2f pos = sprite.getPosition();
-        if (pos.x < 0 || pos.y < 0 || pos.x > 800 || pos.y > 600) {
+        if (pos.x < 0 || pos.y < 0 || pos.x > SCREEN_WIDTH || pos.y > SCREEN_HEIGHT) {
             toBeDestroyed = true;
         }
     }
@@ -39,3 +41,7 @@
     int Fireball::getOwnerPlayerNum() const { return ownerPlayerNum; }
     bool Fireball::getToBeDestroyed() const { return toBeDestroyed; }
     void Fireball::setToBeDestroyed(bool val) { toBeDestroyed = val; }
+    
+    sf::FloatRect Fireball::getBounds() const {
+        return sprite.getGlobalBounds();
+    }
