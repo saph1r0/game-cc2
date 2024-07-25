@@ -6,10 +6,10 @@
 
 class Subject {
 private:
-    std::vector<Observer*> observers;
+    std::vector<Observer*> observers; //vector that allows you to enter any type of class thanks to observer.h
     int item;
     int collision;
-    int health;
+    int health; //3 variables we track
 
 public:
     void addObserver(Observer* observer);
