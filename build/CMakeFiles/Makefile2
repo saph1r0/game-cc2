@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = /home/ubuntu20/c++/gaamee-cc2/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/juego.dir/all
+all: CMakeFiles/1.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +71,34 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/juego.dir/clean
+clean: CMakeFiles/1.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/juego.dir
+# Target rules for target CMakeFiles/1.dir
 
 # All Build rule for target.
-CMakeFiles/juego.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ubuntu20/c++/gaamee-cc2/build/CMakeFiles --progress-num=1,2,3,4,5 "Built target juego"
-.PHONY : CMakeFiles/juego.dir/all
+CMakeFiles/1.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ubuntu20/c++/gaamee-cc2/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target 1"
+.PHONY : CMakeFiles/1.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/juego.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu20/c++/gaamee-cc2/build/CMakeFiles 5
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/juego.dir/all
+CMakeFiles/1.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu20/c++/gaamee-cc2/build/CMakeFiles 8
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/1.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu20/c++/gaamee-cc2/build/CMakeFiles 0
-.PHONY : CMakeFiles/juego.dir/rule
+.PHONY : CMakeFiles/1.dir/rule
 
 # Convenience name for target.
-juego: CMakeFiles/juego.dir/rule
-.PHONY : juego
+1 : CMakeFiles/1.dir/rule
+.PHONY : 1
 
 # clean rule for target.
-CMakeFiles/juego.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/juego.dir/build.make CMakeFiles/juego.dir/clean
-.PHONY : CMakeFiles/juego.dir/clean
+CMakeFiles/1.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1.dir/build.make CMakeFiles/1.dir/clean
+.PHONY : CMakeFiles/1.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
